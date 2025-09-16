@@ -4,16 +4,16 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"go/types"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/gorilla/mux"
+	"github.com/zengren707/ecom/types"
 )
 
 func TestUserServiceHandlers(t *testing.T) {
-	userStore := &mockUserStore
+	userStore := &mockUserStore{}
 	handler := NewHandler(userStore)
 
 	t.Run("should fail if the user payload is invalid", func(t *testing.T) {
@@ -44,11 +44,11 @@ type mockUserStore struct {
 }
 
 func (m *mockUserStore) GetUserByEmail(email string) (*types.User, error) {
-	return nil, nil
+	return &types.User{}, nil
 }
 func (m *mockUserStore) GetUserByID(id string) (*types.User, error) {
-	return nil, nil
+	return &types.User{}, nil
 }
-func (m *mockUserStore) CreateUser(email string) (*types.User, error) {
-	return nil, nil
+func (m *mockUserStore) CreateUser(u types.User) error {
+	return nil
 }

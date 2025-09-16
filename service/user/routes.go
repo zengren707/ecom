@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/gorilla/mux"
+	"github.com/zengren707/ecom/service/auth"
 	"github.com/zengren707/ecom/types"
 	"github.com/zengren707/ecom/utils"
-
-	"github.com/gorilla/mux"
 )
 
 type Hander struct {
-	store *types.UserStore
+	store types.UserStore
 }
 
-func NewHandler(store *types.UserStore) *Hander {
+func NewHandler(store types.UserStore) *Hander {
 	return &Hander{store: store}
 }
 
@@ -38,7 +38,7 @@ func (h *Hander) handleRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	hashedPassword := auth.hashedPassword(payload.Password)
+	hashedPassword, _ := auth.HashedPassword(payload.Password)
 
 	//if it doesnt we create the new user
 	err = h.store.CreateUser(types.User{
