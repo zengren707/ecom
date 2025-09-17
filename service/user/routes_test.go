@@ -46,7 +46,7 @@ type mockUserStore struct {
 func (m *mockUserStore) GetUserByEmail(email string) (*types.User, error) {
 	return &types.User{}, nil
 }
-func (m *mockUserStore) GetUserByID(id string) (*types.User, error) {
+func (m *mockUserStore) GetUserByID(id int) (*types.User, error) {
 	return &types.User{}, nil
 }
 func (m *mockUserStore) CreateUser(u types.User) error {

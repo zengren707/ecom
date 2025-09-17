@@ -10,23 +10,23 @@ import (
 	"github.com/zengren707/ecom/utils"
 )
 
-type Hander struct {
+type Handler struct {
 	store types.UserStore
 }
 
-func NewHandler(store types.UserStore) *Hander {
-	return &Hander{store: store}
+func NewHandler(store types.UserStore) *Handler {
+	return &Handler{store: store}
 }
 
-func (h *Hander) RegisterRoutes(router *mux.Router) {
+func (h *Handler) RegisterRoutes(router *mux.Router) {
 	router.HandleFunc("/login", h.handleLogin).Methods("POST")
 	router.HandleFunc("/register", h.handleRegister).Methods("POST")
 }
 
-func (h *Hander) handleLogin(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) handleLogin(w http.ResponseWriter, r *http.Request) {
 
 }
-func (h *Hander) handleRegister(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) handleRegister(w http.ResponseWriter, r *http.Request) {
 	var payload types.RegisterUserPayload
 	if err := utils.ParseJSON(r, payload); err != nil {
 		utils.WriteError(w, http.StatusBadRequest, err)
